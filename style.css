@@ -1,0 +1,92 @@
+:root{
+  --size: 220px;
+}
+
+html,body,#app{
+  height:100%;
+  margin:0;
+  background: linear-gradient(180deg,#0f172a,#0b1220);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: #fff;
+  overflow:hidden;
+}
+
+.hint{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  margin:0;
+  opacity: .6;
+  font-weight:600;
+  user-select:none;
+}
+
+/* overlay container so animations appear above everything */
+.sigma-overlay{
+  position: absolute;
+  pointer-events: none; /* allow clicks to pass through other than initial trigger */
+  transform-origin: center center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: var(--size);
+  height: var(--size);
+  will-change: transform, opacity, filter;
+}
+
+/* image style */
+.sigma-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-drag: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.6));
+}
+
+/* flash circle */
+.flash {
+  position:absolute;
+  width: 140%;
+  height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.9) 0%, rgba(255,255,255,.2) 40%, rgba(255,255,255,0) 60%);
+  transform: scale(0);
+  pointer-events:none;
+}
+
+/* keyframes */
+@keyframes sigma-pop {
+  0% { transform: scale(.2) rotate(-6deg); opacity: 0; filter: saturate(1.2) contrast(1); }
+  20% { transform: scale(1.25) rotate(6deg); opacity: 1; filter: saturate(1.5) contrast(1.2); }
+  45% { transform: scale(.95) rotate(-4deg); }
+  70% { transform: scale(1.05) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; filter: none; }
+}
+
+@keyframes sigma-shake {
+  0% { transform: translateX(0);}
+  25% { transform: translateX(-6px) rotate(-2deg);}
+  50% { transform: translateX(6px) rotate(2deg);}
+  75% { transform: translateX(-4px) rotate(-1deg);}
+  100% { transform: translateX(0); }
+}
+
+@keyframes flash-pop {
+  0% { transform: scale(0); opacity: 0.9; }
+  40% { transform: scale(1.02); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* classes applied dynamically */
+.play-pop {
+  animation: sigma-pop .55s cubic-bezier(.2,.9,.2,1);
+}
+
+.play-shake {
+  animation: sigma-shake .45s ease-in-out;
+}
+
+.play-flash {
+  animation: flash-pop .45s ease-out;
+}
