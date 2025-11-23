@@ -2,39 +2,58 @@
   --size: 220px;
 }
 
-html,body,#app{
-  height:100%;
-  margin:0;
+/* global */
+html, body, #app {
+  height: 100%;
+  margin: 0;
   background: linear-gradient(180deg,#0f172a,#0b1220);
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   color: #fff;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.hint{
+/* petit texte en haut à gauche */
+.hint {
   position: absolute;
   top: 12px;
   left: 12px;
-  margin:0;
+  margin: 0;
   opacity: .6;
-  font-weight:600;
-  user-select:none;
+  font-weight: 600;
+  user-select: none;
 }
 
-/* overlay container so animations appear above everything */
+/* compteur */
+.counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  background: rgba(0,0,0,.4);
+  padding: 6px 12px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  transition: opacity .25s;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* overlay de l'image sigma */
 .sigma-overlay{
   position: absolute;
-  pointer-events: none; /* allow clicks to pass through other than initial trigger */
+  pointer-events: none;
   transform-origin: center center;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: var(--size);
   height: var(--size);
   will-change: transform, opacity, filter;
 }
 
-/* image style */
+/* l’image sigma */
 .sigma-overlay img {
   width: 100%;
   height: 100%;
@@ -44,18 +63,18 @@ html,body,#app{
   filter: drop-shadow(0 10px 20px rgba(0,0,0,.6));
 }
 
-/* flash circle */
+/* flash de lumière */
 .flash {
-  position:absolute;
+  position: absolute;
   width: 140%;
   height: 140%;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255,255,255,.9) 0%, rgba(255,255,255,.2) 40%, rgba(255,255,255,0) 60%);
   transform: scale(0);
-  pointer-events:none;
+  pointer-events: none;
 }
 
-/* keyframes */
+/* ANIMATIONS */
 @keyframes sigma-pop {
   0% { transform: scale(.2) rotate(-6deg); opacity: 0; filter: saturate(1.2) contrast(1); }
   20% { transform: scale(1.25) rotate(6deg); opacity: 1; filter: saturate(1.5) contrast(1.2); }
@@ -65,10 +84,10 @@ html,body,#app{
 }
 
 @keyframes sigma-shake {
-  0% { transform: translateX(0);}
-  25% { transform: translateX(-6px) rotate(-2deg);}
-  50% { transform: translateX(6px) rotate(2deg);}
-  75% { transform: translateX(-4px) rotate(-1deg);}
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px) rotate(-2deg); }
+  50% { transform: translateX(6px) rotate(2deg); }
+  75% { transform: translateX(-4px) rotate(-1deg); }
   100% { transform: translateX(0); }
 }
 
@@ -78,7 +97,7 @@ html,body,#app{
   100% { transform: scale(1.6); opacity: 0; }
 }
 
-/* classes applied dynamically */
+/* classes ajoutées dynamiquement en JS */
 .play-pop {
   animation: sigma-pop .55s cubic-bezier(.2,.9,.2,1);
 }
@@ -89,4 +108,34 @@ html,body,#app{
 
 .play-flash {
   animation: flash-pop .45s ease-out;
+}
+
+/* Écran de démarrage */
+#startScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Bouton SIGMA */
+#startBtn {
+  font-size: 48px;
+  padding: 22px 50px;
+  border: none;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #000;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+#startBtn:hover {
+  transform: scale(1.1);
 }

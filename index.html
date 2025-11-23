@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <title>Sigma Click App</title>
@@ -8,11 +8,19 @@
 </head>
 <body>
   <div id="app">
+    <!-- Écran de démarrage -->
+    <div id="startScreen">
+      <button id="startBtn">SIGMA</button>
+    </div>
+
+    <!-- Texte en haut à gauche -->
     <h1 class="hint">Clique n'importe où — SIGMA EDIT</h1>
   </div>
 
-  <audio id="clickSound" src="assets/click.wav"></audio>
+  <!-- Compteur caché, toggle avec L -->
+  <div id="counter" class="counter hidden">Clicks: 0</div>
 
+  <!-- renderer.js -->
   <script src="renderer.js"></script>
 </body>
 </html>
